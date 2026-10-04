@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WorkHub — Legal Online Work</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#172033}
+header{background:#172033;color:white;padding:16px 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:3}
+.logo{font-size:22px;font-weight:800}.btn{border:0;border-radius:10px;padding:11px 16px;cursor:pointer;font-weight:700}.primary{background:#2563eb;color:#fff}.light{background:#eef2ff;color:#172033}
+nav button{background:none;border:0;color:white;margin-left:8px;cursor:pointer}
+.hero{padding:70px 5%;background:linear-gradient(135deg,#e8efff,#fff);text-align:center}.hero h1{font-size:42px;margin:10px 0}.hero p{font-size:18px;color:#596579;max-width:650px;margin:15px auto 25px}
+.wrap{max-width:1100px;margin:auto;padding:35px 5%}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:#fff;padding:22px;border-radius:16px;box-shadow:0 6px 22px #17203312}.card h3{margin-top:0}.muted{color:#667085}.money{font-size:28px;font-weight:800}
+section{scroll-margin-top:80px}.task{display:flex;justify-content:space-between;gap:15px;align-items:center}
+.badge{display:inline-block;padding:5px 9px;border-radius:20px;background:#e8f7ee;color:#16803c;font-size:12px;font-weight:700}
+input,select{width:100%;padding:12px;border:1px solid #d8dee9;border-radius:9px;margin:7px 0 14px}
+.modal{display:none;position:fixed;inset:0;background:#0008;align-items:center;justify-content:center;padding:20px;z-index:5}.modal .card{width:min(430px,100%)}
+footer{background:#172033;color:#cbd5e1;padding:30px 5%;margin-top:30px;text-align:center}
+.small{font-size:13px}
+@media(max-width:650px){.hero h1{font-size:32px}nav{display:none}.task{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<header><div class="logo">WorkHub</div><nav>
+<button onclick="go('home')">Home</button><button onclick="go('tasks')">Tasks</button><button onclick="go('dashboard')">Dashboard</button>
+</nav><button class="btn light" onclick="openLogin()">Login</button></header>
+
+<section id="home" class="hero">
+<h1>Earn by completing real online tasks</h1>
+<p>A simple platform for legitimate freelance and micro-task work. No guaranteed-profit or investment promises.</p>
+<button class="btn primary" onclick="openRegister()">Create Free Account</button>
+</section>
+
+<section class="wrap">
+<h2>How it works</h2>
+<div class="grid">
+<div class="card"><h3>1. Register</h3><p class="muted">Create your free worker account.</p></div>
+<div class="card"><h3>2. Choose a task</h3><p class="muted">Pick an available task that matches your skills.</p></div>
+<div class="card"><h3>3. Submit work</h3><p class="muted">Complete the task and submit proof where required.</p></div>
+<div class="card"><h3>4. Get paid</h3><p class="muted">Approved earnings become available for withdrawal.</p></div>
+</div>
+</section>
+
+<section id="tasks" class="wrap">
+<h2>Available Tasks</h2>
+<div class="grid">
+<div class="card task"><div><span class="badge">Data Entry</span><h3>Enter product information</h3><p class="muted">Estimated time: 30 minutes</p></div><div class="money">Rs. 300</div></div>
+<div class="card task"><div><span class="badge">Research</span><h3>Find business contact details</h3><p class="muted">Estimated time: 45 minutes</p></div><div class="money">Rs. 450</div></div>
+<div class="card task"><div><span class="badge">Writing</span><h3>Short product descriptions</h3><p class="muted">10 descriptions</p></div><div class="money">Rs. 500</div></div>
+</div>
+</section>
+
+<section id="dashboard" class="wrap">
+<h2>Demo Dashboard</h2>
+<div class="grid">
+<div class="card"><p class="muted">Available balance</p><div class="money" id="balance">Rs. 0</div></div>
+<div class="card"><p class="muted">Completed tasks</p><div class="money" id="tasksDone">0</div></div>
+<div class="card"><p class="muted">Pending earnings</p><div class="money">Rs. 0</div></div>
+</div>
+<br><div class="card"><h3>Withdrawal</h3><p class="muted">This demo only records a request locally. A real payment system requires a secure backend and verified payment integration.</p>
+<button class="btn primary" onclick="openWithdraw()">Request Withdrawal</button></div>
+</section>
+
+<footer><b>WorkHub</b><br><span class="small">A legitimate work platform demo. Users are paid for approved work, not for depositing money.</span></footer>
+
+<div class="modal" id="modal"><div class="card">
+<h2 id="modalTitle">Create account</h2>
+<form onsubmit="submitForm(event)">
+<label>Name</label><input id="name" required>
+<label>Email</label><input id="email" type="email" required>
+<label>Password</label><input type="password" required>
+<div id="withdrawFields" style="display:none"><label>Payment method</label><select><option>Easypaisa</option><option>JazzCash</option></select><label>Amount</label><input type="number" min="1"></div>
+<button class="btn primary" type="submit">Continue</button>
+<button class="btn light" type="button" onclick="closeModal()">Cancel</button>
+</form></div></div>
+
+<script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+function openLogin(){document.getElementById('modalTitle').textContent='Login';document.getElementById('withdrawFields').style.display='none';document.getElementById('modal').style.display='flex'}
+function openRegister(){document.getElementById('modalTitle').textContent='Create account';document.getElementById('withdrawFields').style.display='none';document.getElementById('modal').style.display='flex'}
+function openWithdraw(){document.getElementById('modalTitle').textContent='Withdrawal request';document.getElementById('withdrawFields').style.display='block';document.getElementById('modal').style.display='flex'}
+function closeModal(){document.getElementById('modal').style.display='none'}
+function submitForm(e){e.preventDefault();alert('Demo submitted successfully. A real website needs a secure server/database before accepting real accounts or payments.');closeModal()}
+</script>
+</body>
+</html>
